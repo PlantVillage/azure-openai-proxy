@@ -1,0 +1,7 @@
+api_base: "/v1"
+deployment_config:
+  - deployment_name: "gpt-5.2-codex"
+    model_name: "gpt-5.2-codex"
+    endpoint: "https://plantvillage-openai-2.openai.azure.com"
+    api_key: "your key here"
+    api_version: "2025-04-01-preview"
