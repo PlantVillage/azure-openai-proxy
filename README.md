@@ -1,5 +1,49 @@
 # azure-openai-proxy
 
+## Quickstart
+
+1) `cp config-template.yaml config.yaml`
+2) Edit `config.yaml`. Put the API Key for Azure into the api_key variable.
+3) Run `./make_proxy.sh`
+
+That starts the proxy. It runs on port 8282.
+
+Edit your editor to point use an openai compatible endpoint.
+
+In Zed, that looks like this:
+
+```json
+    "language_models": {
+        "openai_compatible": {
+            "proxy": {
+                "api_url": "http://localhost:8282/v1",
+                "available_models": [
+                    {
+                        "name": "gpt-5.2-codex",
+                        "display_name": "gpt-5.2-codex",
+                        "max_tokens": 200000,
+                        "max_output_tokens": 32000,
+                        "max_completion_tokens": 200000,
+                        "capabilities": {
+                            "tools": true,
+                            "images": false,
+                            "parallel_tool_calls": false,
+                            "prompt_cache_key": false,
+                            "chat_completions": false
+                        }
+                    }
+                ]
+            }
+        }
+    },
+```
+
+
+
+
+
+## Legacy README:
+
 [![License](https://img.shields.io/github/license/koordinator-sh/koordinator.svg?color=4EB1BA&style=flat-square)](https://opensource.org/licenses/Apache-2.0)
 [![GitHub release](https://img.shields.io/github/v/release/stulzq/azure-openai-proxy.svg?style=flat-square)](https://github.com/stulzq/azure-openai-proxy/releases/latest)
 [![Go Report Card](https://goreportcard.com/badge/github.com/stulzq/azure-openai-proxy)](https://goreportcard.com/badge/github.com/stulzq/azure-openai-proxy)
@@ -54,7 +98,7 @@ AZURE_OPENAI_MODEL_MAPPER: gpt-3.5-turbo=gpt-35-turbo
 
 ![Screenshot of the overview UI for an OpenAI Resource in the Azure portal with the endpoint & access keys location circled in red.](assets/images/endpoint.png)
 
-API Key: This value can be found in the **Keys & Endpoint** section when examining your resource from the Azure portal. You can use either `KEY1` or `KEY2`. 
+API Key: This value can be found in the **Keys & Endpoint** section when examining your resource from the Azure portal. You can use either `KEY1` or `KEY2`.
 
 ### Proxy
 
@@ -81,7 +125,7 @@ AZURE_OPENAI_SOCKS_PROXY=socks5://127.0.0.1:1080
 ### Use Docker
 
 ````shell
-# config by environment 
+# config by environment
 docker run -d -p 8080:8080 --name=azure-openai-proxy \
   --env AZURE_OPENAI_ENDPOINT=your_azure_endpoint \
   --env AZURE_OPENAI_API_VER=your_azure_api_ver \
@@ -258,6 +302,3 @@ azure-openai:
     networks:
       - chatgpt-ns
 ````
-
-
-

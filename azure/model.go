@@ -2,7 +2,6 @@ package azure
 
 import (
 	"bytes"
-	"fmt"
 	"github.com/pkg/errors"
 	"log"
 	"net/http"
@@ -42,7 +41,7 @@ func (c *StripPrefixConverter) Convert(req *http.Request, config *DeploymentConf
 	req.Host = config.EndpointUrl.Host
 	req.URL.Scheme = config.EndpointUrl.Scheme
 	req.URL.Host = config.EndpointUrl.Host
-	req.URL.Path = path.Join(fmt.Sprintf("/openai/deployments/%s", config.DeploymentName), strings.Replace(req.URL.Path, c.Prefix+"/", "/", 1))
+	req.URL.Path = path.Join("/openai/", strings.Replace(req.URL.Path, c.Prefix+"/", "/", 1))
 	req.URL.RawPath = req.URL.EscapedPath()
 
 	query := req.URL.Query()
